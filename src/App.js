@@ -28,13 +28,14 @@ function App() {
     width: 300, // drawing area width
     height: 300, // drawing area height
   });
+  let api = process.env.REACT_APP_API
 
   useEffect(() => {
     fetchDoodleClasses()
   }, [])
 
   const fetchDoodleClasses = async () => {
-    await axios.get('http://localhost:8000/doodle-classes').then((res) => {
+    await axios.get(`${api}/doodle-classes`).then((res) => {
       setDoodleClasses(res.data.doodle_classes)
       randomDoodleClass(res.data.doodle_classes)
     })
@@ -71,7 +72,7 @@ function App() {
         let file = dataURLtoFile(imgData, "test.png")
         let data = new FormData()
         data.append("file", file)
-        await axios.post(`http://localhost:8000/predict?doodle_class1=${doodleClass[0]}&doodle_class2=${doodleClass[1]}`, data).then(res => {
+        await axios.post(`${api}/predict?doodle_class1=${doodleClass[0]}&doodle_class2=${doodleClass[1]}`, data).then(res => {
           if (res.data.result) {
             Swal.fire({
               icon: 'success',
