@@ -77,7 +77,7 @@ function App() {
             Swal.fire({
               icon: 'success',
               title: 'Your picture is correct',
-              text: 'It is ' + res.data.result_predict.predict_class + ' ' + (res.data.result_predict.accuracy * 100) + '%',
+              text: 'It is ' + res.data.result_predict.predict_class,
             }).then(() => {
               randomDoodleClass()
               onClear()
